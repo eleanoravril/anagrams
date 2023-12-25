@@ -23,7 +23,6 @@ import { Turn } from "./Turn.js";
  * Class of Game objects. Contains most of the game logic.
  */
 class Game {
-
   /**
    * Factory classes
    * @private
@@ -37,7 +36,7 @@ class Game {
     Move: Move,
     Player: Player,
     Rack: Rack,
-    Turn: Turn
+    Turn: Turn,
   };
 
   /**
@@ -51,13 +50,13 @@ class Game {
    * @typedef {WAITING|PLAYING|GAME_OVER|TWO_PASSES|FAILED_CHALLENGE|TIMED_OUT} Game.State
    */
   static State = {
-    WAITING:          "Waiting for players",
-    PLAYING:          "Playing",
+    WAITING: "Waiting for players",
+    PLAYING: "Playing",
     FAILED_CHALLENGE: "Challenge failed",
 
-    GAME_OVER:        "Game over",
-    TWO_PASSES:       "All players passed twice",
-    TIMED_OUT:        "Timed out"
+    GAME_OVER: "Game over",
+    TWO_PASSES: "All players passed twice",
+    TIMED_OUT: "Timed out",
   };
 
   /**
@@ -65,16 +64,16 @@ class Game {
    * @typedef {UNPAUSE|PAUSE|CHALLENGE|PLAY|TAKE_BACK|PASS|GAME_OVER|SWAP} Game.Command
    */
   static Command = {
-    CHALLENGE:         "challenge",
+    CHALLENGE: "challenge",
     CONFIRM_GAME_OVER: "confirmGameOver",
-    PASS:              "pass",
-    PAUSE:             "pause",
-    PLAY:              "play",
-    REDO:              "redo",
-    SWAP:              "swap",
-    TAKE_BACK:         "takeBack",
-    UNDO:              "undo",
-    UNPAUSE:           "unpause"
+    PASS: "pass",
+    PAUSE: "pause",
+    PLAY: "play",
+    REDO: "redo",
+    SWAP: "swap",
+    TAKE_BACK: "takeBack",
+    UNDO: "undo",
+    UNPAUSE: "unpause",
   };
 
   /**
@@ -104,20 +103,20 @@ class Game {
    */
   static Notify = {
     ANOTHER_GAME: "another game",
-    CONNECTIONS:  "connections",
-    JOIN:         "join game",
-    MESSAGE:      "message",
-    NEXT_GAME:    "next game",
-    PAUSE:        "pause game",
-    REJECT:       "reject play",
-    TICK:         "tick timer",
-    TURN:         "play turn",
-    UNDONE:       "undone",
-    UNPAUSE:      "unpause",
+    CONNECTIONS: "connections",
+    JOIN: "join game",
+    MESSAGE: "message",
+    NEXT_GAME: "next game",
+    PAUSE: "pause game",
+    REJECT: "reject play",
+    TICK: "tick timer",
+    TURN: "play turn",
+    UNDONE: "undone",
+    UNPAUSE: "unpause",
 
     /* Notifications sent to monitors (games pages) */
-    UPDATE:       "update",
-    MONITOR:      "monitor"
+    UPDATE: "update",
+    MONITOR: "monitor",
   };
 
   /**
@@ -133,14 +132,14 @@ class Game {
    * @typedef {PLAY|SWAP|GAME_OVER|CHALLENGE_LOST|CHALLENGE_WON|TOOK_BACK|PASSED|TIMED_OUT} Game.Turns
    */
   static Turns = {
-    PLAYED:         "play",
-    SWAPPED:        "swap",
-    GAME_ENDED:     "game-over",
+    PLAYED: "play",
+    SWAPPED: "swap",
+    GAME_ENDED: "game-over",
     CHALLENGE_LOST: "challenge-lost",
-    CHALLENGE_WON:  "challenge-won",
-    TOOK_BACK:      "took-back",
-    PASSED:         "passed",
-    TIMED_OUT:      "timed-out"
+    CHALLENGE_WON: "challenge-won",
+    TOOK_BACK: "took-back",
+    PASSED: "passed",
+    TIMED_OUT: "timed-out",
   };
 
   /**
@@ -152,9 +151,9 @@ class Game {
    * @typedef {NONE|TURN|GAME} Game.Timer
    */
   static Timer = {
-    NONE:  undefined,
-    TURN:  /*i18n*/"Turn timer",
-    GAME:  /*i18n*/"Game timer"
+    NONE: undefined,
+    TURN: /*i18n*/ "Turn timer",
+    GAME: /*i18n*/ "Game timer",
   };
 
   /**
@@ -166,10 +165,10 @@ class Game {
    * @typedef {NONE|MISS|PER_TURN|PER_WORD} Game.Penalty
    */
   static Penalty = {
-    NONE:     undefined,
-    MISS:     /*i18n*/"Miss next turn",
-    PER_TURN: /*i18n*/"Lose points",
-    PER_WORD: /*i18n*/"Lose points per word"
+    NONE: undefined,
+    MISS: /*i18n*/ "Miss next turn",
+    PER_TURN: /*i18n*/ "Lose points",
+    PER_WORD: /*i18n*/ "Lose points per word",
   };
 
   /**
@@ -182,9 +181,9 @@ class Game {
    * @typedef {NONE|AFTER|REJECT} Game.WordCheck
    */
   static WordCheck = {
-    NONE:    undefined,
-    AFTER:   /*i18n*/"Check words after play",
-    REJECT:  /*i18n*/"Reject unknown words"
+    NONE: undefined,
+    AFTER: /*i18n*/ "Check words after play",
+    REJECT: /*i18n*/ "Reject unknown words",
   };
 
   /**
@@ -196,22 +195,22 @@ class Game {
    * constructor code will pick the new value up.
    */
   static DEFAULTS = {
-	  edition:         "English_Scrabble",
-	  dictionary:      "CSW2019_English",
+    edition: "English_Scrabble",
+    dictionary: "CSW2019_English",
 
-    timerType:        Game.Timer.NONE,
-		timeAllowed:      25, // minutes per game
-		timePenalty:      0,
+    timerType: Game.Timer.NONE,
+    timeAllowed: 25, // minutes per game
+    timePenalty: 0,
 
     challengePenalty: Game.Penalty.NONE,
-		penaltyPoints:    5,
+    penaltyPoints: 5,
 
-    wordCheck:        Game.WordCheck.NONE,
-    predictScore:     true,
-    minPlayers:       2,
-    maxPlayers:       0,
-    allowUndo:        false,
-    allowTakeBack:    true
+    wordCheck: Game.WordCheck.NONE,
+    predictScore: true,
+    minPlayers: 2,
+    maxPlayers: 0,
+    allowUndo: false,
+    allowTakeBack: true,
   };
 
   /**
@@ -238,7 +237,6 @@ class Game {
    * *not* "apply the default".
    */
   constructor(params) {
-
     /**
      * Debug function.
      * @member {function}
@@ -280,10 +278,10 @@ class Game {
     this.turns = [];
 
     /**
-     * The game board.
-     * @member {Board}
+     * The pot of tiles.
+     * @member {Pot}
      */
-    this.board = undefined;
+    this.pot = undefined;
 
     /**
      * Size of rack. Always the same as Edition.rackCount,
@@ -382,11 +380,9 @@ class Game {
          * @member {number?}
          */
         this.timeAllowed = params.timeAllowed || 0;
-      }
-      else if (this.timerType === Game.Timer.GAME)
+      } else if (this.timerType === Game.Timer.GAME)
         this.timeAllowed = Game.DEFAULTS.timeAllowed;
-      else
-        this.timeAllowed = 1;
+      else this.timeAllowed = 1;
 
       if (this.timerType === Game.Timer.GAME) {
         /**
@@ -405,8 +401,10 @@ class Game {
     if (params.challengePenalty && params.challengePenalty !== "none")
       this.challengePenalty = params.challengePenalty;
 
-    if (this.challengePenalty === Game.Penalty.PER_TURN
-        || this.challengePenalty === Game.Penalty.PER_WORD) {
+    if (
+      this.challengePenalty === Game.Penalty.PER_TURN ||
+      this.challengePenalty === Game.Penalty.PER_WORD
+    ) {
       /**
        * The score penalty to apply for a failed challenge. Only used
        * if `challengePenalty` is `Game.Penalty.PER_TURN` or `Game.Penalty.PER_WORD`.
@@ -441,8 +439,10 @@ class Game {
       this.maxPlayers = params.maxPlayers;
     }
 
-    if (typeof this.maxPlayers !== "undefined"
-        && this.maxPlayers < (this.minPlayers || 2))
+    if (
+      typeof this.maxPlayers !== "undefined" &&
+      this.maxPlayers < (this.minPlayers || 2)
+    )
       delete this.maxPlayers; // infinity
 
     if (params.predictScore) {
@@ -521,10 +521,10 @@ class Game {
    * @return {Promise} that resolves to this
    */
   create() {
-    return this.promiseEdition()
-    .then(edo => {
+    return this.promiseEdition().then((edo) => {
       const factory = this.constructor.CLASSES;
-      this.board = new factory.Board(factory, edo);
+      //this.board = new factory.Board(factory, edo);
+      this.pot = new factory.Pot(factory);
       this.letterBag = new LetterBag(edo);
       this.bonuses = edo.bonuses;
       this.rackSize = edo.rackCount;
@@ -552,16 +552,14 @@ class Game {
     assert(this.letterBag, "Cannot addPlayer() before create()");
     assert(
       !this.maxPlayers || this.players.length < this.maxPlayers,
-      "Cannot addPlayer() to a full game");
+      "Cannot addPlayer() to a full game"
+    );
     player._debug = this._debug;
     this.players.push(player);
-    if (this.timerType)
-      player.clock = this.timeAllowed * 60;
-    if (fillRack)
-      player.fillRack(this.letterBag, this.rackSize);
+    if (this.timerType) player.clock = this.timeAllowed * 60;
+    if (fillRack) player.fillRack(this.letterBag, this.rackSize);
     /* c8 ignore next 2 */
-    if (this._debug)
-      this._debug(this.key, "added player", player.stringify());
+    if (this._debug) this._debug(this.key, "added player", player.stringify());
     return this;
   }
 
@@ -572,15 +570,15 @@ class Game {
    */
   removePlayer(player) {
     player.returnTiles(this.letterBag);
-    const index = this.players.findIndex(p => p.key === player.key);
-    assert(index >= 0,
-           `No such player ${player.key} in ${this.key}`);
+    const index = this.players.findIndex((p) => p.key === player.key);
+    assert(index >= 0, `No such player ${player.key} in ${this.key}`);
     this.players.splice(index, 1);
     /* c8 ignore next 2 */
-    if (this._debug)
-      this._debug(player.key, "left", this.key);
-    if (this.players.length < (this.minPlayers || 2)
-        && this.state !== Game.State.GAME_OVER)
+    if (this._debug) this._debug(player.key, "left", this.key);
+    if (
+      this.players.length < (this.minPlayers || 2) &&
+      this.state !== Game.State.GAME_OVER
+    )
       this.state = Game.State.WAITING;
   }
 
@@ -590,7 +588,7 @@ class Game {
    * @return {Player} player, or undefined if not found
    */
   getPlayerWithKey(key) {
-    return this.players.find(p => p.key === key);
+    return this.players.find((p) => p.key === key);
   }
 
   /**
@@ -616,14 +614,13 @@ class Game {
    * @return {Player} previous player
    */
   previousPlayer(player) {
-    if (typeof player === "undefined")
-      player = this.getPlayer();
-    else if (typeof player === "string")
-      player = this.getPlayerWithKey(player);
-    const index = this.players.findIndex(p => p.key === player.key);
+    if (typeof player === "undefined") player = this.getPlayer();
+    else if (typeof player === "string") player = this.getPlayerWithKey(player);
+    const index = this.players.findIndex((p) => p.key === player.key);
     assert(index >= 0, `${player.key} not found in ${this.key}`);
     return this.players[
-      (index + this.players.length - 1) % this.players.length];
+      (index + this.players.length - 1) % this.players.length
+    ];
   }
 
   /**
@@ -635,23 +632,19 @@ class Game {
    * @return {Player} the next player
    */
   nextPlayer(player) {
-    if (typeof player === "undefined")
-      player = this.getPlayer();
-    else if (typeof player === "string")
-      player = this.getPlayerWithKey(player);
-    let index = this.players.findIndex(p => p.key === player.key);
+    if (typeof player === "undefined") player = this.getPlayer();
+    else if (typeof player === "string") player = this.getPlayerWithKey(player);
+    let index = this.players.findIndex((p) => p.key === player.key);
     assert(index >= 0, `${player.key} not found in ${this.key}`);
     for (let i = 0; i < this.players.length; i++) {
       let nextPlayer = this.players[(index + 1) % this.players.length];
       if (nextPlayer.missNextTurn) {
         nextPlayer.missNextTurn = false;
         index++;
-      } else
-        return nextPlayer;
+      } else return nextPlayer;
     }
     /* c8 ignore next */
-    return assert.fail(
-      `Unable to determine next player after ${player.key}`);
+    return assert.fail(`Unable to determine next player after ${player.key}`);
   }
 
   /**
@@ -662,7 +655,7 @@ class Game {
   calculateBonus(tilesPlaced) {
     // Duplicates Edition.calculateBonus, so it can be used even if
     // the Edition is not loaded (e.g. on the client side)
-    return this.bonuses ? (this.bonuses[tilesPlaced] || 0) : 0;
+    return this.bonuses ? this.bonuses[tilesPlaced] || 0 : 0;
   }
 
   /**
@@ -670,8 +663,7 @@ class Game {
    * @return {number} points
    */
   winningScore() {
-    return this.players.reduce(
-      (max, player) => Math.max(max, player.score), 0);
+    return this.players.reduce((max, player) => Math.max(max, player.score), 0);
   }
 
   /**
@@ -681,7 +673,8 @@ class Game {
   getWinner() {
     return this.players.reduce(
       (best, player) => (player.score > best.score ? player : best),
-      this.players[0]);
+      this.players[0]
+    );
   }
 
   /**
@@ -689,8 +682,7 @@ class Game {
    * @return {Player} the player with no tiles, or undefined
    */
   getPlayerWithNoTiles() {
-    return this.players.find(
-      player => (player.rack.tiles().length === 0));
+    return this.players.find((player) => player.rack.tiles().length === 0);
   }
 
   /**
@@ -698,18 +690,18 @@ class Game {
    */
   hasEnded() {
     switch (this.state) {
-    case Game.State.WAITING:
-    case Game.State.FAILED_CHALLENGE:
-    case Game.State.PLAYING:
-      return false;
-    case undefined:
-    case Game.State.GAME_OVER:
-    case Game.State.TWO_PASSES:
-    case Game.State.TIMED_OUT:
-      return true;
-    default:
-      assert.fail(`Bad game state ${this.state}`);
-      return true;
+      case Game.State.WAITING:
+      case Game.State.FAILED_CHALLENGE:
+      case Game.State.PLAYING:
+        return false;
+      case undefined:
+      case Game.State.GAME_OVER:
+      case Game.State.TWO_PASSES:
+      case Game.State.TIMED_OUT:
+        return true;
+      default:
+        assert.fail(`Bad game state ${this.state}`);
+        return true;
     }
   }
 
@@ -720,8 +712,7 @@ class Game {
    */
   lastActivity() {
     const last = this.lastTurn();
-    if (last)
-      return last.timestamp;
+    if (last) return last.timestamp;
 
     return this.creationTimestamp;
   }
@@ -732,8 +723,7 @@ class Game {
    * if no turns have been made yet.
    */
   lastTurn() {
-    if (this.turns.length === 0)
-      return undefined;
+    if (this.turns.length === 0) return undefined;
 
     return this.turns[this.turns.length - 1];
   }
@@ -761,28 +751,17 @@ class Game {
    * @param {function} cb (turn, isLastTurn)
    */
   forEachTurn(cb) {
-    this.turns.forEach(
-      (turn, i) => cb(turn, i === this.turns.length - 1));
+    this.turns.forEach((turn, i) => cb(turn, i === this.turns.length - 1));
   }
 
   /* c8 ignore start */
 
   /**
-   * Get the board square at [col][row]
-   * @return {Square} at col,row
-   */
-  at(col, row) {
-    // Only used client-side
-    return this.board.at(col, row);
-  }
-
-  /**
    * Debug
    */
   stringify() {
-    const options = [ `edition:${this.edition}` ];
-    if (this.dictionary)
-      options.push(`dictionary:${this.dictionary}`);
+    const options = [`edition:${this.edition}`];
+    if (this.dictionary) options.push(`dictionary:${this.dictionary}`);
     if (this.timerType) {
       options.push(`${this.timerType}:${this.timeAllowed}`);
       if (this.timerType === Game.Timer.GAME)
@@ -790,27 +769,24 @@ class Game {
     }
     if (this.challengePenalty) {
       options.push(this.challengePenalty);
-      if (this.challengePenalty === Game.Penalty.PER_TURN
-          || this.challengePenalty === Game.Penalty.PER_WORD)
+      if (
+        this.challengePenalty === Game.Penalty.PER_TURN ||
+        this.challengePenalty === Game.Penalty.PER_WORD
+      )
         options.push(`lose:${this.penaltyPoints}`);
     }
-    if (this.whosTurnKey)
-      options.push(`next:${this.whosTurnKey}`);
+    if (this.whosTurnKey) options.push(`next:${this.whosTurnKey}`);
 
     if (this.wordCheck) options.push(this.wordCheck);
     if (this.challengePenalty) options.push(this.challengePenalty);
     if (this.predictScore) options.push("Predict");
     if (this.allowTakeBack) options.push("Allow takeback");
-    if (this.minPlayers)
-      options.push(`>=${this.minPlayers}`);
-    const ps = this.players.map(p => p.stringify()).join(",");
+    if (this.minPlayers) options.push(`>=${this.minPlayers}`);
+    const ps = this.players.map((p) => p.stringify()).join(",");
     options.push(`players:[${ps}]`);
-    if (this.maxPlayers)
-      options.push(`<=${this.maxPlayers}`);
-    if (this.nextGameKey)
-      options.push(`Next game ${this.nextGameKey}`);
-    if (this.pausedBy)
-      options.push(`Paused by ${this.pausedBy}`);
+    if (this.maxPlayers) options.push(`<=${this.maxPlayers}`);
+    if (this.nextGameKey) options.push(`Next game ${this.nextGameKey}`);
+    if (this.pausedBy) options.push(`Paused by ${this.pausedBy}`);
     return `Game ${this.key} {${options.join(", ")}}`;
   }
 
@@ -821,7 +797,7 @@ class Game {
    * @return the first robot found.
    */
   hasRobot() {
-    return this.players.find(p => p.isRobot);
+    return this.players.find((p) => p.isRobot);
   }
 
   /**
@@ -838,8 +814,8 @@ class Game {
    */
   serialisable(um) {
     return Promise.all(
-      this.players.map(player => player.serialisable(this, um)))
-    .then(ps => {
+      this.players.map((player) => player.serialisable(this, um))
+    ).then((ps) => {
       const simple = {
         key: this.key,
         creationTimestamp: this.creationTimestamp,
@@ -858,7 +834,7 @@ class Game {
         // this.swapSize not sent
         // this.bonuses not sent
         // turns is a list of Turn.serialisable
-        turns: this.turns.map(t => t.serialisable())
+        turns: this.turns.map((t) => t.serialisable()),
       };
       if (this.minPlayers) simple.minPlayers = this.minPlayers;
       if (this.maxPlayers) simple.maxPlayers = this.maxPlayers;
@@ -867,8 +843,10 @@ class Game {
         simple.timeAllowed = this.timeAllowed;
         simple.timePenalty = this.timePenalty;
       }
-      if (this.challengePenalty === Game.Penalty.PER_TURN
-          || this.challengePenalty === Game.Penalty.PER_WORD)
+      if (
+        this.challengePenalty === Game.Penalty.PER_TURN ||
+        this.challengePenalty === Game.Penalty.PER_WORD
+      )
         simple.penaltyPoints = this.penaltyPoints;
       if (this.nextGameKey) simple.nextGameKey = this.nextGameKey;
       if (this.pausedBy) simple.pausedBy = this.pausedBy;
@@ -901,20 +879,16 @@ class Game {
      */
     this._db = db;
 
-    if (!this._channels)
-      this._channels = [];
+    if (!this._channels) this._channels = [];
 
     // Compatibility; timeLimit in s to timeAllowed in minutes
     if (this.timeLimit && !this.timeAllowed)
       this.timeAllowed = this.timeLimit / 60;
 
-    if (!this._debug)
-      this._debug = () => {};
-    if (!this.players)
-      this.players = [];
-    this.players.forEach(p => p._debug = this._debug);
-    if (!this.turns)
-      this.turns = [];
+    if (!this._debug) this._debug = () => {};
+    if (!this.players) this.players = [];
+    this.players.forEach((p) => (p._debug = this._debug));
+    if (!this.turns) this.turns = [];
 
     return Promise.resolve(this);
   }
@@ -930,73 +904,24 @@ class Game {
   static fromSerialisable(simple, factory) {
     const game = new factory.Game(simple);
     game.state = simple.state;
-    game.players = simple.players.map(
-      p => factory.Player.fromSerialisable(p, factory));
-    game.turns = simple.turns.map(t => Turn.fromSerialisable(t, factory));
+    game.players = simple.players.map((p) =>
+      factory.Player.fromSerialisable(p, factory)
+    );
+    game.turns = simple.turns.map((t) => Turn.fromSerialisable(t, factory));
     return game;
   }
 
   // Shortcuts for moving tiles around within the game
 
   /**
-   * Shorthand to remove tiles from the board and put
-   * them on a rack
-   * @param {Tile[]} tiles list of tile placements
-   * @param {Player} player player whose rack we are adjusting
-   */
-  boardToRack(tiles, player) {
-    for (const placement of tiles) {
-      const square = this.at(placement.col, placement.row);
-      const tile = square.unplaceTile();
-      assert(tile, `No tile at ${stringify(placement)}`);
-      player.rack.addTile(tile);
-    }
-  }
-
-  /**
-   * Shorthand to move tiles from the rack to the board
-   * at the locations dictated in a set of placements
-   * @param {Tile[]} tiles list of tile placements
-   * @param {Player} player player whose rack we are adjusting
-   * @param {function?} cb optional callback on each tile that was placed
-   */
-  rackToBoard(tiles, player, cb) {
-    for (const place of tiles) {
-      const tile = player.rack.removeTile(place);
-      assert(
-        tile, `Tile ${stringify(place)} not found on rack`);
-      const square = this.at(place.col, place.row);
-      square.placeTile(tile, true);
-      if (cb)
-        cb(tile);
-    }
-  }
-
-  /**
    * Shorthand method to take tiles out of the letter bag and put
-   * them on a rack
-   * @param {Tile[]} tiles list of tiles
-   * @param {Player} player player whose rack we are adjusting
+   * them in the pot
+   * @param {Tile} tile tile to flip over
    */
-  bagToRack(tiles, player) {
-    for (const tile of tiles) {
-      const removed = this.letterBag.removeTile(tile);
-      assert(removed, `${stringify(tile)} missing from bag`);
-      player.rack.addTile(removed);
-    }
-  }
-
-  /**
-   * Shorthand method to move a set of tiles from a rack to the bag
-   * @param {Tile[]} tiles list of tiles
-   * @param {Player} player player whose rack we are adjusting
-   */
-  rackToBag(tiles, player) {
-    for (const tile of tiles) {
-      const removed = player.rack.removeTile(tile);
-      assert(removed, `${stringify(tile)} missing from rack`);
-      this.letterBag.returnTile(removed);
-    }
+  bagToPot(tiles) {
+    const removed = this.letterBag.removeTile(tile);
+    assert(removed, `${stringify(tile)} missing from bag`);
+    this.pot.addTile(removed);
   }
 
   /**
@@ -1006,22 +931,24 @@ class Game {
   playIfReady() {
     /* c8 ignore next 2 */
     if (this._debug)
-      this._debug("playIfReady ", this.key,
-                  this.whosTurnKey ? `player ${this.whosTurnKey}` : "",
-                  "state", this.state);
+      this._debug(
+        "playIfReady ",
+        this.key,
+        this.whosTurnKey ? `player ${this.whosTurnKey}` : "",
+        "state",
+        this.state
+      );
 
     if (this.hasEnded()) {
       /* c8 ignore next 2 */
-      if (this._debug)
-        this._debug("\tgame is over");
+      if (this._debug) this._debug("\tgame is over");
       return Promise.resolve(this);
     }
 
     // Check preconditions for starting the game
     if (this.players.length < (this.minPlayers || 2)) {
       /* c8 ignore next 2 */
-      if (this._debug)
-        this._debug("\tnot enough players");
+      if (this._debug) this._debug("\tnot enough players");
       // Result is not used
       return Promise.resolve(this);
     }
@@ -1031,13 +958,11 @@ class Game {
     // The shuffle can be suppressed for unit testing.
     if (this.state === Game.State.WAITING) {
       /* c8 ignore next 2 */
-      if (this._debug)
-        this._debug("\tpreconditions met");
+      if (this._debug) this._debug("\tpreconditions met");
 
       if (this.players.length > 1 && !this._noPlayerShuffle) {
         /* c8 ignore next 2 */
-        if (this._debug)
-          this._debug("\tshuffling player order");
+        if (this._debug) this._debug("\tshuffling player order");
         for (let i = this.players.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           // i = 1, j = 0,1
@@ -1055,24 +980,23 @@ class Game {
       const player = this.players[0];
       this.whosTurnKey = player.key; // assign before save()
       /* c8 ignore next 2 */
-      if (this._debug)
-        this._debug("\t", player.key, "to play");
+      if (this._debug) this._debug("\t", player.key, "to play");
       this.state = Game.State.PLAYING;
 
-      return this.save()
-      // startTurn will autoplay if the first player is
-      // a robot. It will also start the clock.
-      .then(() => this.startTurn(player));
+      return (
+        this.save()
+          // startTurn will autoplay if the first player is
+          // a robot. It will also start the clock.
+          .then(() => this.startTurn(player))
+      );
     }
 
     const nextPlayer = this.getPlayer();
     if (nextPlayer) {
-      if (nextPlayer.isRobot)
-        return this.startTurn(nextPlayer);
+      if (nextPlayer.isRobot) return this.startTurn(nextPlayer);
 
       /* c8 ignore next 2 */
-      if (this._debug)
-        this._debug("\twaiting for", nextPlayer.name, "to play");
+      if (this._debug) this._debug("\twaiting for", nextPlayer.name, "to play");
       this.startTheClock();
     }
     return Promise.resolve(this);
@@ -1103,17 +1027,19 @@ class Game {
       redacted.replacements = [];
       for (const tile of turn.replacements) {
         const rt = new Tile(tile);
-        rt.letter = '#';
+        rt.letter = "#";
         redacted.replacements.push(rt);
       }
     }
 
     return this.save()
-    .then(() => Promise.all([
-      this.notifyPlayer(player, Game.Notify.TURN, turn),
-      this.notifyOthers(player, Game.Notify.TURN, redacted)
-    ]))
-    .then(() => this);
+      .then(() =>
+        Promise.all([
+          this.notifyPlayer(player, Game.Notify.TURN, turn),
+          this.notifyOthers(player, Game.Notify.TURN, redacted),
+        ])
+      )
+      .then(() => this);
   }
 
   /**
@@ -1123,11 +1049,12 @@ class Game {
    * @private
    */
   startTheClock() {
-    if (typeof this._intervalTimer === "undefined"
-        && this.timerType
-        && this.state === Game.State.PLAYING
-        && !this.pausedBy) {
-
+    if (
+      typeof this._intervalTimer === "undefined" &&
+      this.timerType &&
+      this.state === Game.State.PLAYING &&
+      !this.pausedBy
+    ) {
       // Broadcast a ping every second
       /**
        * Timer object for ticking.
@@ -1136,8 +1063,7 @@ class Game {
        */
       this._intervalTimer = setInterval(() => this.tick(), 1000);
       /* c8 ignore next 2 */
-      if (this._debug)
-        this._debug(this.key, "started the clock");
+      if (this._debug) this._debug(this.key, "started the clock");
       return true;
     }
     return false;
@@ -1149,13 +1075,11 @@ class Game {
    * @private
    */
   stopTheClock() {
-    if (typeof this._intervalTimer == "undefined")
-      return false;
+    if (typeof this._intervalTimer == "undefined") return false;
     /* c8 ignore next 2 */
-    if (this._debug)
-      this._debug(this.key, "stopped the clock");
+    if (this._debug) this._debug(this.key, "stopped the clock");
     clearInterval(this._intervalTimer);
-    delete(this._intervalTimer);
+    delete this._intervalTimer;
     return true;
   }
 
@@ -1166,22 +1090,19 @@ class Game {
    */
   tick() {
     const player = this.getPlayer();
-    if (!player)
-      return;
+    if (!player) return;
 
     player.tick();
 
     // Really should save(), otherwise the ticks won't
     // survive a server restart. However it's expensive, and server
     // restarts are rare, so let's not.
-    this.notifyAll(
-      Game.Notify.TICK,
-      {
-        gameKey: this.key,
-        playerKey: player.key,
-        clock: player.clock,
-        timestamp: Date.now()
-      });
+    this.notifyAll(Game.Notify.TICK, {
+      gameKey: this.key,
+      playerKey: player.key,
+      clock: player.clock,
+      timestamp: Date.now(),
+    });
   }
 
   /**
@@ -1197,12 +1118,11 @@ class Game {
   startTurn(player, timeout) {
     assert(player, "No player");
 
-    if (!this.players.find(p => p.passes < 2))
+    if (!this.players.find((p) => p.passes < 2))
       return this.confirmGameOver(player, Game.State.TWO_PASSES);
 
     /* c8 ignore next 2 */
-    if (this._debug)
-      this._debug("startTurn", player.name, player.key);
+    if (this._debug) this._debug("startTurn", player.name, player.key);
 
     this.whosTurnKey = player.key;
 
@@ -1219,12 +1139,16 @@ class Game {
     if (this.timerType) {
       /* c8 ignore next 2 */
       if (this._debug)
-        this._debug("\ttimed game,", player.name,
-                    "has", (timeout || this.timeAllowed),
-                    "left to play",this.timerType);
+        this._debug(
+          "\ttimed game,",
+          player.name,
+          "has",
+          timeout || this.timeAllowed,
+          "left to play",
+          this.timerType
+        );
       this.startTheClock(); // does nothing if already started
-    }
-    else {
+    } else {
       /* c8 ignore next 2 */
       if (this._debug)
         this._debug("\tuntimed game, wait for", player.name, "to play");
@@ -1233,9 +1157,9 @@ class Game {
 
     if (this.timerType === Game.Timer.TURN)
       // Make the player pass when their clock reaches 0
-      player.setTimeout(
-        timeout || this.timeAllowed * 60,
-        () => this.pass(player, Game.Turns.TIMED_OUT));
+      player.setTimeout(timeout || this.timeAllowed * 60, () =>
+        this.pass(player, Game.Turns.TIMED_OUT)
+      );
 
     return Promise.resolve(this);
   }
@@ -1248,53 +1172,64 @@ class Game {
     const player = this.getPlayer();
     /* c8 ignore next 2 */
     if (this._debug)
-      this._debug("Autoplaying", player.name,
-                  "using", player.dictionary || this.dictionary);
+      this._debug(
+        "Autoplaying",
+        player.name,
+        "using",
+        player.dictionary || this.dictionary
+      );
 
-    let pre = ((player.delayBeforePlay || 0) > 0)
-        ? new Promise(
-          resolve => setTimeout(resolve, player.delayBeforePlay * 500))
+    let pre =
+      (player.delayBeforePlay || 0) > 0
+        ? new Promise((resolve) =>
+            setTimeout(resolve, player.delayBeforePlay * 500)
+          )
         : Promise.resolve();
-    let mid = ((player.delayBeforePlay || 0) > 0)
-        ? new Promise(
-          resolve => setTimeout(resolve, player.delayBeforePlay * 500))
+    let mid =
+      (player.delayBeforePlay || 0) > 0
+        ? new Promise((resolve) =>
+            setTimeout(resolve, player.delayBeforePlay * 500)
+          )
         : Promise.resolve();
     // Before making a robot move, consider challenging the last
     // player.
     // challenge is a Promise that will resolve to true if a
     // challenge is made, or false otherwise.
     let lastPlay = this.lastTurn();
-    if (lastPlay && lastPlay.type === Game.Turns.PLAYED
-        && this.dictionary
-        && player.canChallenge) {
+    if (
+      lastPlay &&
+      lastPlay.type === Game.Turns.PLAYED &&
+      this.dictionary &&
+      player.canChallenge
+    ) {
       const lastPlayer = this.getPlayerWithKey(lastPlay.playerKey);
       // There's no point if they are also a robot, though
       // that should never arise in a "real" game where there can
       // only be one robot.
       if (!lastPlayer.isRobot) {
         // use game dictionary, not robot dictionary
-        pre = pre.then(() => this.promiseDictionary())
-        .then(dict => {
-          const bad = lastPlay.words
-                .filter(word => !dict.hasWord(word.word));
-          if (bad.length > 0) {
-            // Challenge succeeded
-            /* c8 ignore next 2 */
-            if (this._debug)
-              this._debug("Challenging", lastPlayer.name);
-            /* c8 ignore next 2 */
-            if (this._debug)
-              this._debug("Bad words:", bad);
-            return this.takeBack(player, Game.Turns.CHALLENGE_WON)
-            .then(() => true);
-          }
-          return false; // no challenge made
-        });
+        pre = pre
+          .then(() => this.promiseDictionary())
+          .then((dict) => {
+            const bad = lastPlay.words.filter(
+              (word) => !dict.hasWord(word.word)
+            );
+            if (bad.length > 0) {
+              // Challenge succeeded
+              /* c8 ignore next 2 */
+              if (this._debug) this._debug("Challenging", lastPlayer.name);
+              /* c8 ignore next 2 */
+              if (this._debug) this._debug("Bad words:", bad);
+              return this.takeBack(player, Game.Turns.CHALLENGE_WON).then(
+                () => true
+              );
+            }
+            return false; // no challenge made
+          });
       }
     }
 
-    return pre
-    .then(challenged => {
+    return pre.then((challenged) => {
       if (!challenged && lastPlay) {
         // Last play was good, check the last player has tiles
         // otherwise the game is over
@@ -1307,25 +1242,22 @@ class Game {
       let bestPlay = null;
       return this.findBestPlay(
         player.rack.tiles(),
-        data => {
+        (data) => {
           if (typeof data === "string") {
             /* c8 ignore next 2 */
-            if (this._debug)
-              this._debug(data);
+            if (this._debug) this._debug(data);
           } else {
             bestPlay = data;
             /* c8 ignore next 2 */
-            if (this._debug)
-              this._debug("Best", bestPlay.stringify());
+            if (this._debug) this._debug("Best", bestPlay.stringify());
           }
-        }, player.dictionary || this.dictionary)
-      .then(() => {
-        if (bestPlay)
-          return mid.then(() => this.play(player, bestPlay));
+        },
+        player.dictionary || this.dictionary
+      ).then(() => {
+        if (bestPlay) return mid.then(() => this.play(player, bestPlay));
 
         /* c8 ignore next 2 */
-        if (this._debug)
-          this._debug(player.name, "can't play, passing");
+        if (this._debug) this._debug(player.name, "can't play, passing");
         return this.pass(player, Game.Turns.PASSED);
       });
     });
@@ -1348,10 +1280,10 @@ class Game {
   save() {
     assert(this._db, "No _db for save()");
     /* c8 ignore next 2 */
-    if (this._debug)
-      this._debug("Saving game", this.key);
-    return this._db.set(this.key, CBOR.encode(this, Game.CLASSES))
-    .then(() => this);
+    if (this._debug) this._debug("Saving game", this.key);
+    return this._db
+      .set(this.key, CBOR.encode(this, Game.CLASSES))
+      .then(() => this);
   }
 
   /**
@@ -1364,16 +1296,13 @@ class Game {
    */
   notifyPlayer(player, message, data) {
     /* c8 ignore next 2 */
-    if (this._debug)
-      this._debug("b>f", player.key, message,
-                stringify(data));
+    if (this._debug) this._debug("b>f", player.key, message, stringify(data));
     // Player may be connected several times, or not at all
-    this._channels.forEach(
-      channel => {
-        if (channel.player && channel.player.key === player.key)
-          channel.emit(message, data);
-        return false;
-      });
+    this._channels.forEach((channel) => {
+      if (channel.player && channel.player.key === player.key)
+        channel.emit(message, data);
+      return false;
+    });
   }
 
   /**
@@ -1385,10 +1314,10 @@ class Game {
    */
   notifyAll(message, data) {
     if (message !== Game.Notify.TICK)
-      /* c8 ignore next 2 */
       if (this._debug)
+        /* c8 ignore next 2 */
         this._debug("b>f *", message, stringify(data));
-    this._channels.forEach(channel => channel.emit(message, data));
+    this._channels.forEach((channel) => channel.emit(message, data));
   }
 
   /**
@@ -1400,15 +1329,13 @@ class Game {
    */
   notifyOthers(player, message, data) {
     /* c8 ignore next 2 */
-    if (this._debug)
-      this._debug("b>f !", player.key, message, stringify(data));
-    this._channels.forEach(
-      channel => {
-        // Player may be connected several times, so check key and not object
-        if (channel.player && channel.player.key !== player.key)
-          channel.emit(message, data);
-        return false;
-      });
+    if (this._debug) this._debug("b>f !", player.key, message, stringify(data));
+    this._channels.forEach((channel) => {
+      // Player may be connected several times, so check key and not object
+      if (channel.player && channel.player.key !== player.key)
+        channel.emit(message, data);
+      return false;
+    });
   }
 
   /**
@@ -1436,26 +1363,26 @@ class Game {
    */
   sendCONNECTIONS() {
     Promise.all(
-      this.players
-      .map(player => player.serialisable(this)
-           .then(cat => {
-             cat.gameKey = this.key;
-             if (cat.key === this.whosTurnKey)
-               cat.isNextToGo = true;
-             return cat;
-           })))
-    .then(res => {
+      this.players.map((player) =>
+        player.serialisable(this).then((cat) => {
+          cat.gameKey = this.key;
+          if (cat.key === this.whosTurnKey) cat.isNextToGo = true;
+          return cat;
+        })
+      )
+    ).then((res) => {
       // Add observers who are not active players. These track
       // game state without participating, though at some point
       // we may add referreing functions.
       res = res.concat(
         this._channels
-        .filter(channel => !channel.player)
-        .map(() => {
-          return {
-            isObserver: true
-          };
-        }));
+          .filter((channel) => !channel.player)
+          .map(() => {
+            return {
+              isObserver: true,
+            };
+          })
+      );
       this.notifyAll(Game.Notify.CONNECTIONS, res);
     });
   }
@@ -1470,29 +1397,29 @@ class Game {
    * @return {Promise} promise that resolves to undefined
    */
   connect(channel, playerKey) {
-
     // Make sure this is a valid (known) player
-    const player = this.players.find(p => p.key === playerKey);
+    const player = this.players.find((p) => p.key === playerKey);
     /* c8 ignore next 2 */
     if (playerKey && !player)
-      console.error("WARNING: player key", playerKey,
-                    "not found in game", this.key);
+      console.error(
+        "WARNING: player key",
+        playerKey,
+        "not found in game",
+        this.key
+      );
 
     /* c8 ignore next 2 */
     if (this.getConnection(player)) {
-      console.error("WARNING:", playerKey, "already connected to",
-                    this.key);
+      console.error("WARNING:", playerKey, "already connected to", this.key);
       player._isConnected = true;
     } else if (player) {
       // This player is just connecting
       /* c8 ignore next 2 */
-      if (this._debug)
-        this._debug("\t", player.name, "connected to", this.key);
+      if (this._debug) this._debug("\t", player.name, "connected to", this.key);
       player._isConnected = true;
     } else {
       /* c8 ignore next 2 */
-      if (this._debug)
-        this._debug("\tconnected non-player");
+      if (this._debug) this._debug("\tconnected non-player");
     }
 
     // Player is connected. Decorate the channel. It may seem
@@ -1501,8 +1428,7 @@ class Game {
     channel.game = this;
     channel.player = player;
 
-    if (!this._channels)
-      this._channels = [];
+    if (!this._channels) this._channels = [];
     this._channels.push(channel);
 
     // Tell players that the player is connected
@@ -1514,29 +1440,16 @@ class Game {
       if (channel.player) {
         channel.player._isConnected = false;
         /* c8 ignore next 2 */
-        if (this._debug)
-          this._debug(channel.player.name, "disconnected");
+        if (this._debug) this._debug(channel.player.name, "disconnected");
       } else {
         /* c8 ignore next 2 */
-        if (this._debug)
-          this._debug("non-player disconnected");
+        if (this._debug) this._debug("non-player disconnected");
       }
       this._channels.splice(this._channels.indexOf(channel), 1);
       this.sendCONNECTIONS();
     });
 
     return this.playIfReady();
-  }
-
-  /**
-   * Used for testing only.
-   * @param sboard string representation of a game {@linkcode Board}
-   * @return {Promise} resolving to `this`
-   */
-  loadBoard(sboard) {
-    return this.promiseEdition()
-    .then(ed => this.board.parse(this.constructor.CLASSES, ed, sboard))
-    .then(() => this);
   }
 
   /**
@@ -1561,17 +1474,20 @@ class Game {
    * @abstract
    */
   findBestPlay(rack, cb, dictionary) {
-    return (Platform.USE_WORKERS
-            ? import(
-              /* webpackMode: "lazy" */
-              /* webpackChunkName: "findBestPlayController" */
-              "../backend/findBestPlayController.js")
-            : import(
-              /* webpackMode: "lazy" */
-              /* webpackChunkName: "findBestPlay" */
-              "../game/findBestPlay.js"))
-    .then(mod => mod.findBestPlay(this, rack, cb, dictionary));
+    return (
+      Platform.USE_WORKERS
+        ? import(
+            /* webpackMode: "lazy" */
+            /* webpackChunkName: "findBestPlayController" */
+            "../backend/findBestPlayController.js"
+          )
+        : import(
+            /* webpackMode: "lazy" */
+            /* webpackChunkName: "findBestPlay" */
+            "../game/findBestPlay.js"
+          )
+    ).then((mod) => mod.findBestPlay(this, rack, cb, dictionary));
   }
 }
 
-export { Game }
+export { Game };

@@ -7,7 +7,6 @@
  * a single game, and are used on both browser and server sides.
  */
 class Player {
-
   // Note that we do NOT use the field syntax for the fields that
   // are serialised. If we do that, then the constructor blows the
   // field away when loading CBOR.
@@ -21,7 +20,6 @@ class Player {
    * @param {object.<string,class>} factory maps class name to a class
    */
   constructor(spec, factory) {
-
     /**
      * Factory object used to create this object (not serialiable)
      * @private
@@ -46,8 +44,19 @@ class Player {
      * it's only then we know how big it has to be.
      * @member {Rack}
      */
-    this.rack = new this._factory.Rack(
-      this._factory, {id: `Rack_${this.key}`, size: 8 });
+    this.rack = new this._factory.Rack(this._factory, {
+      id: `Rack_${this.key}`,
+      size: 8,
+    });
+
+    /**
+     * Collection of words. By default, this is empty.
+     * @member {Collection}
+     */
+    this.rack = new this._factory.Rack(this._factory, {
+      id: `Rack_${this.key}`,
+      size: 8,
+    });
 
     /**
      * Number of times this player has passed (or swapped)
@@ -146,14 +155,15 @@ class Player {
    * the player
    */
   serialisable(game, um) {
-    return ((this.isRobot || !um)
-            ? Promise.resolve(this)
-            : um.getUser({ key: this.key }).catch(() => this))
-    .then(ump => {
+    return (
+      this.isRobot || !um
+        ? Promise.resolve(this)
+        : um.getUser({ key: this.key }).catch(() => this)
+    ).then((ump) => {
       const simple = {
         name: this.name,
         key: this.key,
-        score: this.score
+        score: this.score,
       };
       if (this.isRobot) simple.isRobot = true;
       if (this._isConnected) simple._isConnected = true;
@@ -177,12 +187,9 @@ class Player {
    */
   static fromSerialisable(simple, factory) {
     const player = new factory.Player(simple, factory);
-    if (simple.passes)
-      player.passes = simple.passes;
-    if (simple.score)
-      player.score = simple.score;
-    if (simple.clock)
-      player.clock = simple.clock;
+    if (simple.passes) player.passes = simple.passes;
+    if (simple.score) player.score = simple.score;
+    if (simple.clock) player.clock = simple.clock;
     return player;
   }
 
@@ -197,10 +204,12 @@ class Player {
     // +1 to allow space for tile sorting in the UI
     // Use the player key for the rack id, so we can maintain
     // unique racks for different players
-    this.rack = new (this._factory.Rack)(
-      this._factory, { id: `Rack_${this.key}`, size: rackSize + 1 });
+    this.rack = new this._factory.Rack(this._factory, {
+      id: `Rack_${this.key}`,
+      size: rackSize + 1,
+    });
     for (let i = 0; i < rackSize; i++)
-      this.rack.addTile(new (this._factory.Tile)(letterBag.getRandomTile()));
+      this.rack.addTile(new this._factory.Tile(letterBag.getRandomTile()));
     this.score = 0;
   }
 
@@ -219,12 +228,10 @@ class Player {
   tick() {
     this.clock--;
     /* c8 ignore next 2 */
-    if (this._debug)
-      this._debug("Tick", this.name, this.clock);
+    if (this._debug) this._debug("Tick", this.name, this.clock);
     if (this.clock <= 0 && typeof this._onTimeout === "function") {
       /* c8 ignore next 2 */
-      if (this._debug)
-        this._debug(this.name, "has timed out at", new Date());
+      if (this._debug) this._debug(this.name, "has timed out at", new Date());
       this._onTimeout();
       // Timeout only happens once!
       delete this._onTimeout;
@@ -242,8 +249,7 @@ class Player {
    */
   setTimeout(time, onTimeout) {
     /* c8 ignore next 2 */
-    if (this._debug)
-      this._debug(this.name, `turn timeout in ${time}s`);
+    if (this._debug) this._debug(this.name, `turn timeout in ${time}s`);
     this.clock = time;
     this._onTimeout = onTimeout;
   }
@@ -253,10 +259,8 @@ class Player {
    */
   stringify() {
     let s = `Player '${this.name}'`;
-    if (this.isRobot)
-      s += " (Robot)";
-    if (this.key)
-      s += ` key ${this.key}`;
+    if (this.isRobot) s += " (Robot)";
+    if (this.key) s += ` key ${this.key}`;
     s += ` rack "${this.rack.letters().sort().join("")}"`;
     return s + ` score ${this.score}`;
   }
@@ -267,7 +271,6 @@ class Player {
   toggleAdvice() {
     this.wantsAdvice = !this.wantsAdvice;
   }
-
 }
 
-export { Player }
+export { Player };
