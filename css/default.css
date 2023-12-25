@@ -15,7 +15,7 @@ body {
 
   border: none;
 
-  background: url('../images/baize.jpg');
+  background: rgb(210, 229, 241);
 
   -webkit-touch-callout: none;
 
@@ -87,8 +87,8 @@ body {
   width: 100%;
 }
 
-.dialog-row input[type=text],
-.dialog-row input[type=password] {
+.dialog-row input[type="text"],
+.dialog-row input[type="password"] {
   width: 100%;
 }
 
@@ -119,7 +119,7 @@ body {
   text-decoration: none;
   box-sizing: border-box;
   font-weight: normal;
-  box-shadow: 0.1em 0.1em 0.3em rgba(0,0,0,0.9);
+  box-shadow: 0.1em 0.1em 0.3em rgba(0, 0, 0, 0.9);
 }
 
 .ui-tooltip {
@@ -132,17 +132,17 @@ body {
  * "client_games" interfaces by the same code, so has shared CSS
  */
 .icon-robot {
-  background-image: url('../images/robot-face.svg') !important;
+  background-image: url("../images/robot-face.svg") !important;
   background-size: 16px 16px;
 }
 
 .icon-person {
-  background-image: url('../images/person.svg') !important;
+  background-image: url("../images/person.svg") !important;
   background-size: 16px 16px;
 }
 
 .icon-winner {
-  background-image: url('../images/winner.svg') !important;
+  background-image: url("../images/winner.svg") !important;
   background-size: 16px 16px;
   color: #f3c716ff;
 }
@@ -154,14 +154,15 @@ body {
   vertical-align: middle;
 }
 
-.player-table .connect-state {}
+.player-table .connect-state {
+}
 
 .player-table .connect-state.online {
   color: green;
 }
 
 .player-table .connect-state.offline {
-  color: #FF0000;
+  color: #ff0000;
 }
 
 /* The pointer */
@@ -182,18 +183,20 @@ body {
 
 /* player is missing their next turn */
 .player-table .miss-turn {
-  text-decoration:line-through;
+  text-decoration: line-through;
 }
 
-.player-table td.remaining-tiles {}
+.player-table td.remaining-tiles {
+}
 
-.player-table td.player-score {}
+.player-table td.player-score {
+}
 
 /**
  * Styling specific to the "games" interfaces
  */
 body.games-ui {
-  color: white;
+  color: rgb(0, 0, 0);
   margin-left: 3em;
   margin-right: 3em;
   font-size: 1.2em;
@@ -223,8 +226,16 @@ body.games-ui {
 .signed-in {
 }
 
+.not-signed-in {
+  float: left;
+}
+
 #gamesCumulative {
   display: none;
+}
+
+#gamesKnown {
+  margin-top: 3em;
 }
 
 /* Wrap around the games list */
@@ -245,14 +256,14 @@ body.games-ui {
 #gamesList > thead > tr {
   border: 1px solid;
   padding: 0.2em;
-  background-color: #F0E7E0;
+  background-color: #f0e7e0;
   padding: 0.4em 0.2em 0.4em 0.2em;
 }
 
 /* A game in the games table */
 #gamesList .game {
   border: 1px solid;
-  background-color: #F7F7E3;
+  background-color: #f7f7e3;
   padding: 0.4em 0.2em 0.4em 0.2em;
 }
 
@@ -300,7 +311,7 @@ body.games-ui {
     display: none;
   }
 
-  button[name=twist] {
+  button[name="twist"] {
     margin-bottom: 0.2em;
   }
 }
@@ -313,11 +324,11 @@ body.games-ui {
 .block {
   min-width: 25vw;
   max-width: 100vw;
-  background-color: #F7F7E3;
-  border-color: #DCDCC6;
+  background-color: #f7f7e3;
+  border-color: #dcdcc6;
 
   border-style: solid;
-  
+
   -webkit-border-radius: 0.4em;
   -moz-border-radius: 0.4em;
   -ms-border-radius: 0.4em;
@@ -379,7 +390,7 @@ body.games-ui {
 }
 
 #scoresBlock .tick-alert-medium {
-  color:#fcae1e !important;
+  color: #fcae1e !important;
 }
 
 #scoresBlock .tick-alert-high {
@@ -418,7 +429,7 @@ body.games-ui {
 }
 
 #chatBlock .chat-message.warning {
-  color: #B00;
+  color: #b00;
 }
 
 /*------------ LOG BLOCK ------------*/
@@ -454,7 +465,8 @@ body.games-ui {
   margin-left: 2em;
 }
 
-.word-score, .turn-total {
+.word-score,
+.turn-total {
   margin-left: 0.2em;
   margin-right: 0.25em;
 }
@@ -463,14 +475,16 @@ body.games-ui {
 .turn-narrative {
   font-size: 110%;
   margin-top: 0.5em;
-  color: #950000
+  color: #950000;
 }
 
 /* Description of points gained and lost from final racks */
-.game-end-adjustments .rack-adjust {}
+.game-end-adjustments .rack-adjust {
+}
 
 /* Description of points lost due to overtime */
-.game-end-adjustments .time-adjust {}
+.game-end-adjustments .time-adjust {
+}
 
 /* A control placed in the log */
 .turn-control {
@@ -497,12 +511,12 @@ body.games-ui {
 
 /* Highlight for the last played word */
 #board .last-placement {
-  background-color: #E2E298!important;
+  background-color: #e2e298 !important;
 }
 
 /* Highlight for a hint placement */
 #board .hint-placement {
-  background-color: #E2FF98!important;
+  background-color: #e2ff98 !important;
 }
 
 /* typing cursor (there can be only one) */
@@ -512,19 +526,19 @@ body.games-ui {
   font-size: 180%;
   font-weight: bold;
   color: green;
-  background-color: #D0F2D0;
+  background-color: #d0f2d0;
   width: 100%;
   height: 100%;
   text-align: center;
   position: relative;
   z-index: 2000;
   opacity: 0.8;
- -webkit-border-radius: 10%;
- -moz-border-radius: 10%;
- -o-border-radius: 10%;
- -ms-border-radius: 10%;
- -khtml-border-radius: 10%;
- border-radius: 10%;
+  -webkit-border-radius: 10%;
+  -moz-border-radius: 10%;
+  -o-border-radius: 10%;
+  -ms-border-radius: 10%;
+  -khtml-border-radius: 10%;
+  border-radius: 10%;
 }
 
 /* Right-facing arrow */
@@ -551,7 +565,7 @@ body.games-ui {
   font-weight: bold;
 }
 
-#playRack .rack{
+#playRack .rack {
 }
 
 #playRack .controls {
@@ -587,9 +601,9 @@ body.games-ui {
 #blankDialog .letterTable td {
   font-size: 1.5em;
   text-align: center;
-  border-color: #DCDCC6;
+  border-color: #dcdcc6;
   border-style: solid;
-  
+
   -webkit-border-radius: 0.4em;
   -moz-border-radius: 0.4em;
   -ms-border-radius: 0.4em;
@@ -609,7 +623,7 @@ body.games-ui {
   }
 
   #playRack .action-button {
-    display: none!important;
+    display: none !important;
   }
 
   /* Wraps UI components in game */
@@ -623,7 +637,6 @@ body.games-ui {
 /*------------ PORTRAIT SCREEN ------------*/
 
 @media screen and (max-aspect-ratio: 1/1) {
-
   /* Override Surface - Board is full width */
   #board {
     margin-top: 30px;
@@ -656,7 +669,8 @@ body.games-ui {
   }
 
   /* Position the signin block above the board */
-  #signinBlock, #standalone_topBlock {
+  #signinBlock,
+  #standalone_topBlock {
     position: absolute;
     top: 0;
     left: 2vw;
@@ -672,12 +686,12 @@ body.games-ui {
 
   border-width: 2px;
   border-style: solid;
-  border-color:  #54534A;
+  border-color: #54534a;
 
   margin: 0;
   padding: 1px;
 
-  background-color: #AAA38E;
+  background-color: #aaa38e;
 
   max-width: 80vw;
   table-layout: fixed;
@@ -734,15 +748,15 @@ body.games-ui {
 }
 
 .Surface td {
-  width: 2.3em;      /* Edited in code */
-  height: 2.3em;     /* Edited in code */
-  font-size: 2em;    /* Edited in code */
-  line-height: 1em;  /* Edited in code */
+  width: 2.3em; /* Edited in code */
+  height: 2.3em; /* Edited in code */
+  font-size: 2em; /* Edited in code */
+  line-height: 1em; /* Edited in code */
 
-  background-color: #BEB9A6;
+  background-color: #beb9a6;
   border-style: solid;
   border-width: 2px;
-  border-color: #AAA38E;
+  border-color: #aaa38e;
   white-space: normal;
   overflow: hidden;
   padding: 0;
@@ -755,8 +769,8 @@ body.games-ui {
 /* double-word squares */
 .Surface td.square-D,
 .Surface td.square-M {
-  background-color: #FBBBB9;
-  color: #F75D59;
+  background-color: #fbbbb9;
+  color: #f75d59;
 }
 
 /* The centre double-word square */
@@ -766,8 +780,8 @@ body.games-ui {
 
 /* triple-word squares */
 .Surface td.square-T {
-  background-color: #F75D59;
-  color: #8B0000;
+  background-color: #f75d59;
+  color: #8b0000;
 }
 
 /* quad-word squares */
@@ -778,13 +792,13 @@ body.games-ui {
 
 /* double-letter squares */
 .Surface td.square-d {
-  background-color: #A0CFEC;
-  color: #157DEC;
+  background-color: #a0cfec;
+  color: #157dec;
 }
 
 /* triple-letter squares */
 .Surface td.square-t {
-  background-color: #157DEC;
+  background-color: #157dec;
   color: #000080;
 }
 
@@ -802,8 +816,8 @@ body.games-ui {
 /* A tile. Tiles can be dropped on Surfaces */
 
 .Tile {
-  width: 2em;     /* Edited in code */
-  height: 2em;    /* Edited in code */
+  width: 2em; /* Edited in code */
+  height: 2em; /* Edited in code */
   font-size: 1em; /* Edited in code */
 
   display: block;
@@ -815,14 +829,14 @@ body.games-ui {
   /* Code in client_game.js calculates a suitable tile size */
   aspect-ratio: 1/1;
 
-  background-color: #F7F7E3;
-  border-color: #DCDCC6;
+  background-color: #f7f7e3;
+  border-color: #dcdcc6;
   border-style: solid;
   border-width: 3px;
 
   color: #333333;
 
-/*  -webkit-border-radius: 2px;
+  /*  -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
   -o-border-radius: 2px;*/
@@ -889,7 +903,7 @@ body.games-ui {
 /* A tile that is being hovered over with the mouse */
 .Tile.unlocked-tile:hover {
   color: #000000 !important;
-  border-color: #FF9900;
+  border-color: #ff9900;
 }
 
 /* Selected or dragged tile */
@@ -938,7 +952,7 @@ body.games-ui {
 /* "glow" type animation - used for dragging tiles */
 @-webkit-keyframes glow {
   0% {
-    border: 2px solid #FFFFFF;
+    border: 2px solid #ffffff;
   }
   100% {
     border: 2px solid #000000;
@@ -947,7 +961,7 @@ body.games-ui {
 
 @-moz-keyframes glow {
   0% {
-    border: 2px solid #FFFFFF;
+    border: 2px solid #ffffff;
   }
   100% {
     border: 2px solid #000000;
@@ -956,7 +970,7 @@ body.games-ui {
 
 @keyframes glow {
   0% {
-    border: 2px solid #FFFFFF;
+    border: 2px solid #ffffff;
   }
   100% {
     border: 2px solid #000000;
@@ -991,12 +1005,12 @@ body.games-ui {
 
 /* shuffle fat button icon */
 .shuffle-icon {
-  background-image: url('../images/shuffle.png') !important;
+  background-image: url("../images/shuffle.png") !important;
 }
 
 /* unplace button icon */
 .unplace-icon {
-  background-image: url('../images/take-back.png') !important;
+  background-image: url("../images/take-back.png") !important;
 }
 
 .rack {
@@ -1033,12 +1047,12 @@ button.hide-password {
 }
 
 .icon-eye-open {
-  background-image: url('../images/eye-open.svg') !important;
+  background-image: url("../images/eye-open.svg") !important;
   background-size: 16px 16px;
 }
 
 .icon-eye-closed {
-  background-image: url('../images/eye-closed.svg') !important;
+  background-image: url("../images/eye-closed.svg") !important;
   background-size: 16px 16px;
 }
 
@@ -1048,4 +1062,3 @@ button.hide-password {
   text-align: center;
   font-size: 0.875rem;
 }
-

@@ -8,13 +8,23 @@ and license information. Author Crawford Currie http://c-dot.co.uk-->
     <meta charset="utf-8" />
     <!-- base href=".." This breaks $.tabs(), hard, so don't do it /-->
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
 
     <title>Create/Join Game</title>
 
-    <link href="../node_modules/normalize.css/normalize.css" rel="stylesheet" type="text/css">
+    <link
+      href="../node_modules/normalize.css/normalize.css"
+      rel="stylesheet"
+      type="text/css"
+    />
 
-    <script async src="../node_modules/es-module-shims/dist/es-module-shims.js"></script>
+    <script
+      async
+      src="../node_modules/es-module-shims/dist/es-module-shims.js"
+    ></script>
     <script type="importmap">
       {
         "imports": {
@@ -26,35 +36,54 @@ and license information. Author Crawford Currie http://c-dot.co.uk-->
         }
       }
     </script>
-    
-    <!-- Rewritten to reflect the preferences -->
-    <link id="jQueryTheme" href="../node_modules/jquery-ui/dist/themes/pepper-grinder/jquery-ui.min.css" rel="stylesheet" type="text/css">
 
-    <link href="../css/default.css" rel="stylesheet" type="text/css">
+    <!-- Rewritten to reflect the preferences -->
+    <link
+      id="jQueryTheme"
+      href="../node_modules/jquery-ui/dist/themes/pepper-grinder/jquery-ui.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link href="../css/default.css" rel="stylesheet" type="text/css" />
 
     <!-- Rewritten in browser/UI.js to reflect the preferences -->
-    <link id="xanadoCSS" href="../css/default.css" rel="stylesheet" type="text/css">
+    <link
+      id="xanadoCSS"
+      href="../css/default.css"
+      rel="stylesheet"
+      type="text/css"
+    />
 
-    <script type="javascript" src="../node_modules/@rwap/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
-    <script type="module" src="../src/standalone/_StandaloneGamesUI.js"></script>
+    <script
+      type="javascript"
+      src="../node_modules/@rwap/jquery-ui-touch-punch/jquery.ui.touch-punch.js"
+    ></script>
+    <script
+      type="module"
+      src="../src/standalone/_StandaloneGamesUI.js"
+    ></script>
   </head>
   <body class="games-ui">
     <div class="loading">
       <img src="../images/loading.gif" />
     </div>
     <div class="waiting ui-widget">
-      <img src="../images/logo.svg" class="xanado-logo" />
-      <div id="personaliseButton" style="float:right" data-i18n-tooltip="tt-personalise">&#9881;</div>
+      <div
+        id="personaliseButton"
+        style="float: right"
+        data-i18n-tooltip="tt-personalise"
+      >
+        &#9881;
+      </div>
       <div id="gamesCumulative">
         <h2 data-i18n="Leader Board"></h2>
-        <div id="playerList">
-        </div>
+        <div id="playerList"></div>
       </div>
 
       <div id="gamesCumulative">
         <h2 data-i18n="Leader Board"></h2>
-        <div id="playerList">
-        </div>
+        <div id="playerList"></div>
       </div>
 
       <div id="gamesKnown">
@@ -79,7 +108,6 @@ and license information. Author Crawford Currie http://c-dot.co.uk-->
       </div>
     </div>
 
-    <div id="alertDialog" class="dialog">
-    </div>
+    <div id="alertDialog" class="dialog"></div>
   </body>
 </html>

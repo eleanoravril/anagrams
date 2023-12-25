@@ -9,6 +9,8 @@ and license information. Author Crawford Currie http://c-dot.co.uk-->
     <!-- base href=".." This breaks $.tabs(), hard, so don't do it /-->
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <link rel="stylesheet" href="bower_components/scrabble-tiles/dist/css/scrabble.css">
+
 
     <title>Create/Join Game</title>
 
@@ -43,7 +45,6 @@ and license information. Author Crawford Currie http://c-dot.co.uk-->
       <img src="../images/loading.gif" />
     </div>
     <div class="waiting ui-widget" style="display:none">
-      <img src="../images/logo.svg" class="xanado-logo" />
       <div id="signinState">
         <span class="not-signed-in">
           <div data-i18n="text-sign-in"></div>
@@ -62,6 +63,17 @@ and license information. Author Crawford Currie http://c-dot.co.uk-->
         <div id="playerList">
         </div>
       </div>
+
+      <div class="scrabble-container">
+        <span class="scrabble-tile__letter scrabble-tile__rotate-ne">A</span>
+        <span class="scrabble-tile__letter scrabble-tile__rotate-nw">N</span>
+        <span class="scrabble-tile__letter scrabble-tile__rotate-ne">A</span>
+        <span class="scrabble-tile__letter scrabble-tile__rotate-nw">G</span>
+        <span class="scrabble-tile__letter scrabble-tile__rotate-ne">R</span>
+        <span class="scrabble-tile__letter scrabble-tile__rotate-nw">A</span>
+        <span class="scrabble-tile__letter scrabble-tile__rotate-ne">M</span>
+        <span class="scrabble-tile__letter scrabble-tile__rotate-nw">S</span>
+        </div>
 
       <div id="gamesKnown">
         <h2 data-i18n="Games"></h2>

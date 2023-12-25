@@ -10,6 +10,7 @@ import { genKey, stringify } from "../common/Utils.js";
 import { CBOR } from "./CBOR.js";
 import { loadDictionary } from "./loadDictionary.js";
 import { Board } from "./Board.js";
+import { Pot } from "./Pot.js";
 import { Edition } from "./Edition.js";
 import { LetterBag } from "./LetterBag.js";
 import { Move } from "./Move.js";
@@ -524,7 +525,7 @@ class Game {
     return this.promiseEdition().then((edo) => {
       const factory = this.constructor.CLASSES;
       //this.board = new factory.Board(factory, edo);
-      this.pot = new factory.Pot(factory);
+      this.pot = new Pot();
       this.letterBag = new LetterBag(edo);
       this.bonuses = edo.bonuses;
       this.rackSize = edo.rackCount;
